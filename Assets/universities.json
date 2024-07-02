@@ -1,0 +1,598 @@
+{
+  "cities": [
+    {
+      "name": "Adana",
+      "universities": [
+        "Çukurova Üniversitesi",
+        "Adana Bilim ve Teknoloji Üniversitesi",
+        "Toros Üniversitesi",
+        "Çağ Üniversitesi",
+        "Adalet Meslek Yüksekokulu",
+        "Adana Alparslan Türkeş Bilim ve Teknoloji Üniversitesi"
+      ]
+    },
+    {
+      "name": "Adıyaman",
+      "universities": [
+        "Adıyaman Üniversitesi"
+      ]
+    },
+    {
+      "name": "Afyonkarahisar",
+      "universities": [
+        "Afyon Kocatepe Üniversitesi",
+        "Afyonkarahisar Sağlık Bilimleri Üniversitesi"
+      ]
+    },
+    {
+      "name": "Ağrı",
+      "universities": [
+        "Ağrı İbrahim Çeçen Üniversitesi"
+      ]
+    },
+    {
+      "name": "Aksaray",
+      "universities": [
+        "Aksaray Üniversitesi"
+      ]
+    },
+    {
+      "name": "Amasya",
+      "universities": [
+        "Amasya Üniversitesi"
+      ]
+    },
+    {
+      "name": "Ankara",
+      "universities": [
+        "Ankara Üniversitesi",
+        "Hacettepe Üniversitesi",
+        "Gazi Üniversitesi",
+        "Bilkent Üniversitesi",
+        "Orta Doğu Teknik Üniversitesi",
+        "TOBB Ekonomi ve Teknoloji Üniversitesi",
+        "TED Üniversitesi",
+        "Yıldırım Beyazıt Üniversitesi",
+        "Çankaya Üniversitesi",
+        "Başkent Üniversitesi",
+        "Atılım Üniversitesi",
+        "Aydın Üniversitesi",
+        "TOBB ETÜ",
+        "Ufuk Üniversitesi",
+        "Türk Hava Kurumu Üniversitesi",
+        "İpek Üniversitesi",
+        "Beytepe AÜ",
+        "Güvenlik Bilimleri Üniversitesi",
+        "Çağ Üniversitesi",
+        "İlke Üniversitesi",
+        "Anka Teknoloji Üniversitesi",
+        "Altın Koza Üniversitesi",
+        "Türkiye Spor Bilimleri Üniversitesi",
+        "Uluslararası Kıbrıs Üniversitesi",
+        "Kültür Üniversitesi",
+        "Özyeğin Üniversitesi",
+        "Atilim Üniversitesi",
+        "Gelisim Üniversitesi",
+        "Türk-Alman Üniversitesi"
+      ]
+    },
+    {
+      "name": "Antalya",
+      "universities": [
+        "Akdeniz Üniversitesi",
+        "Antalya Akev Üniversitesi",
+        "Alanya Hamdullah Emin Paşa Üniversitesi",
+        "Antalya Bilim Üniversitesi",
+        "Antalya International Üniversitesi",
+        "Avrasya Üniversitesi",
+        "Biruni Üniversitesi",
+        "Doğu Akdeniz Üniversitesi"
+      ]
+    },
+    {
+      "name": "Ardahan",
+      "universities": [
+        "Ardahan Üniversitesi"
+      ]
+    },
+    {
+      "name": "Artvin",
+      "universities": [
+        "Artvin Çoruh Üniversitesi"
+      ]
+    },
+    {
+      "name": "Aydın",
+      "universities": [
+        "Adnan Menderes Üniversitesi",
+        "Aydın Üniversitesi"
+      ]
+    },
+    {
+      "name": "Balıkesir",
+      "universities": [
+        "Balıkesir Üniversitesi",
+        "Bandırma Onyedi Eylül Üniversitesi",
+        "Balıkesir Üniversitesi Çağış Kampüsü"
+      ]
+    },
+    {
+      "name": "Bartın",
+      "universities": [
+        "Bartın Üniversitesi"
+      ]
+    },
+    {
+      "name": "Batman",
+      "universities": [
+        "Batman Üniversitesi"
+      ]
+    },
+    {
+      "name": "Bayburt",
+      "universities": [
+        "Bayburt Üniversitesi"
+      ]
+    },
+    {
+      "name": "Bilecik",
+      "universities": [
+        "Bilecik Şeyh Edebali Üniversitesi"
+      ]
+    },
+    {
+      "name": "Bingöl",
+      "universities": [
+        "Bingöl Üniversitesi"
+      ]
+    },
+    {
+      "name": "Bitlis",
+      "universities": [
+        "Bitlis Eren Üniversitesi"
+      ]
+    },
+    {
+      "name": "Bolu",
+      "universities": [
+        "Abant İzzet Baysal Üniversitesi"
+      ]
+    },
+    {
+      "name": "Burdur",
+      "universities": [
+        "Burdur Mehmet Akif Ersoy Üniversitesi"
+      ]
+    },
+    {
+      "name": "Bursa",
+      "universities": [
+        "Uludağ Üniversitesi",
+        "Bursa Teknik Üniversitesi",
+        "Bursa Orhangazi Üniversitesi",
+        "Bursa Ulutek Üniversitesi",
+        "Bursa Şehir Üniversitesi",
+        "Bursa Uluabatlı Hasan Üniversitesi"
+      ]
+    },
+    {
+      "name": "Çanakkale",
+      "universities": [
+        "Çanakkale Onsekiz Mart Üniversitesi"
+      ]
+    },
+    {
+      "name": "Çankırı",
+      "universities": [
+        "Çankırı Karatekin Üniversitesi"
+      ]
+    },
+    {
+      "name": "Çorum",
+      "universities": [
+        "Hitit Üniversitesi",
+        "Çorum Üniversitesi"
+      ]
+    },
+    {
+      "name": "Denizli",
+      "universities": [
+        "Pamukkale Üniversitesi",
+        "Denizli İktisadi ve İdari Bilimler Üniversitesi"
+      ]
+    },
+    {
+      "name": "Diyarbakır",
+      "universities": [
+        "Dicle Üniversitesi",
+        "Yeni Yüzyıl Üniversitesi Diyarbakır"
+      ]
+    },
+    {
+      "name": "Düzce",
+      "universities": [
+        "Düzce Üniversitesi"
+      ]
+    },
+    {
+      "name": "Edirne",
+      "universities": [
+        "Trakya Üniversitesi"
+      ]
+    },
+    {
+      "name": "Elazığ",
+      "universities": [
+        "Fırat Üniversitesi",
+        "Harput Üniversitesi"
+      ]
+    },
+    {
+      "name": "Erzincan",
+      "universities": [
+        "Erzincan Binali Yıldırım Üniversitesi"
+      ]
+    },
+    {
+      "name": "Erzurum",
+      "universities": [
+        "Atatürk Üniversitesi",
+        "Erzurum Teknik Üniversitesi",
+        "Atatürk Üniversitesi Yunus Emre Kampüsü",
+        "Erzurum Teknik Üniversitesi Rektörlüğü",
+        "İletişim Fakültesi",
+        "Erzurum Bölge İdare Mahkemesi"
+      ]
+    },
+    {
+      "name": "Eskişehir",
+      "universities": [
+        "Anadolu Üniversitesi",
+        "Eskişehir Osmangazi Üniversitesi",
+        "Eskişehir Teknik Üniversitesi",
+        "Eskişehir Üniversitesi"
+      ]
+    },
+    {
+      "name": "Gaziantep",
+      "universities": [
+        "Gaziantep Üniversitesi",
+        "Gaziantep İslam Bilim ve Teknoloji Üniversitesi"
+      ]
+    },
+    {
+      "name": "Giresun",
+      "universities": [
+        "Giresun Üniversitesi"
+      ]
+    },
+    {
+      "name": "Gümüşhane",
+      "universities": [
+        "Gümüşhane Üniversitesi"
+      ]
+    },
+    {
+      "name": "Hakkâri",
+      "universities": [
+        "Hakkâri Üniversitesi"
+      ]
+    },
+    {
+      "name": "Hatay",
+      "universities": [
+        "Mustafa Kemal Üniversitesi",
+        "Hatay Mustafa Kemal Üniversitesi"
+      ]
+    },
+    {
+      "name": "Iğdır",
+      "universities": [
+        "Iğdır Üniversitesi"
+      ]
+    },
+    {
+      "name": "Isparta",
+      "universities": [
+        "Süleyman Demirel Üniversitesi",
+        "Isparta Uygulamalı Bilimler Üniversitesi"
+      ]
+    },
+    {
+      "name": "İstanbul",
+      "universities": [
+        "Boğaziçi Üniversitesi",
+        "İstanbul Üniversitesi",
+        "Galatasaray Üniversitesi",
+        "Kadir Has Üniversitesi",
+        "İstanbul Bilgi Üniversitesi",
+        "Marmara Üniversitesi",
+        "Sabancı Üniversitesi",
+        "İstanbul Teknik Üniversitesi",
+        "Yeditepe Üniversitesi",
+        "Bahçeşehir Üniversitesi",
+        "Fatih Sultan Mehmet Üniversitesi",
+        "Beykent Üniversitesi",
+        "İstanbul Sabahattin Zaim Üniversitesi",
+        "Istanbul Yeni Yüzyıl Üniversitesi",
+        "İstanbul Arel Üniversitesi",
+        "İstanbul Gelişim Üniversitesi",
+        "Bilim Üniversitesi",
+        "Beykoz Üniversitesi",
+        "Yıldız Teknik Üniversitesi",
+        "Mimar Sinan Güzel Sanatlar Üniversitesi",
+        "İstanbul Kültür Üniversitesi",
+        "Koç Üniversitesi",
+        "Türkiye Ekonomi Bankası İstanbul Üniversitesi",
+        "Kültür Üniversitesi"
+      ]
+    },
+    {
+      "name": "İzmir",
+      "universities": [
+        "Ege Üniversitesi",
+        "İzmir Ekonomi Üniversitesi",
+        "Dokuz Eylül Üniversitesi",
+        "İzmir Katip Çelebi Üniversitesi",
+        "İzmir Kâtip Çelebi Üniversitesi"
+      ]
+    },
+    {
+      "name": "Kahramanmaraş",
+      "universities": [
+        "Kahramanmaraş Sütçü İmam Üniversitesi"
+      ]
+    },
+    {
+      "name": "Karabük",
+      "universities": [
+        "Karabük Üniversitesi"
+      ]
+    },
+    {
+      "name": "Karaman",
+      "universities": [
+        "Karamanoğlu Mehmetbey Üniversitesi"
+      ]
+    },
+    {
+      "name": "Kars",
+      "universities": [
+        "Kafkas Üniversitesi"
+      ]
+    },
+    {
+      "name": "Kastamonu",
+      "universities": [
+        "Kastamonu Üniversitesi"
+      ]
+    },
+    {
+      "name": "Kayseri",
+      "universities": [
+        "Erciyes Üniversitesi",
+        "Kayseri Üniversitesi",
+        "Nuh Naci Yazgan Üniversitesi",
+        "Kayseri Üniversitesi Erciyes Yerleşkesi"
+      ]
+    },
+    {
+      "name": "Kırıkkale",
+      "universities": [
+        "Kırıkkale Üniversitesi"
+      ]
+    },
+    {
+      "name": "Kırklareli",
+      "universities": [
+        "Kırklareli Üniversitesi"
+      ]
+    },
+    {
+      "name": "Kırşehir",
+      "universities": [
+        "Ahi Evran Üniversitesi"
+      ]
+    },
+    {
+      "name": "Kilis",
+      "universities": [
+        "Kilis 7 Aralık Üniversitesi"
+      ]
+    },
+    {
+      "name": "Kocaeli",
+      "universities": [
+        "Kocaeli Üniversitesi",
+        "Kocaeli Başiskele İlçesi"
+      ]
+    },
+    {
+      "name": "Konya",
+      "universities": [
+        "Selçuk Üniversitesi",
+        "Konya Necmettin Erbakan Üniversitesi",
+        "KTO Karatay Üniversitesi",
+        "Konya Gıda ve Tarım Üniversitesi",
+        "Konya Teknik Üniversitesi"
+      ]
+    },
+    {
+      "name": "Kütahya",
+      "universities": [
+        "Kütahya Dumlupınar Üniversitesi"
+      ]
+    },
+    {
+      "name": "Malatya",
+      "universities": [
+        "İnönü Üniversitesi",
+        "Malatya Turgut Özal Üniversitesi",
+        "Malatya Bilim Sanat Akademisi"
+      ]
+    },
+    {
+      "name": "Manisa",
+      "universities": [
+        "Celal Bayar Üniversitesi",
+        "Manisa Celal Bayar Üniversitesi"
+      ]
+    },
+    {
+      "name": "Mardin",
+      "universities": [
+        "Mardin Artuklu Üniversitesi"
+      ]
+    },
+    {
+      "name": "Mersin",
+      "universities": [
+        "Mersin Üniversitesi",
+        "Mersin Bilim ve Teknoloji Üniversitesi"
+      ]
+    },
+    {
+      "name": "Muğla",
+      "universities": [
+        "Muğla Sıtkı Koçman Üniversitesi"
+      ]
+    },
+    {
+      "name": "Muş",
+      "universities": [
+        "Muş Alparslan Üniversitesi"
+      ]
+    },
+    {
+      "name": "Nevşehir",
+      "universities": [
+        "Nevşehir Hacı Bektaş Veli Üniversitesi"
+      ]
+    },
+    {
+      "name": "Niğde",
+      "universities": [
+        "Niğde Ömer Halisdemir Üniversitesi"
+      ]
+    },
+    {
+      "name": "Ordu",
+      "universities": [
+        "Ordu Üniversitesi"
+      ]
+    },
+    {
+      "name": "Osmaniye",
+      "universities": [
+        "Osmaniye Korkut Ata Üniversitesi"
+      ]
+    },
+    {
+      "name": "Rize",
+      "universities": [
+        "Rize Üniversitesi"
+      ]
+    },
+    {
+      "name": "Sakarya",
+      "universities": [
+        "Sakarya Üniversitesi",
+        "Sakarya University"
+      ]
+    },
+    {
+      "name": "Samsun",
+      "universities": [
+        "Ondokuz Mayıs Üniversitesi",
+        "Samsun 19 Mayıs Üniversitesi"
+      ]
+    },
+    {
+      "name": "Siirt",
+      "universities": [
+        "Siirt Üniversitesi"
+      ]
+    },
+    {
+      "name": "Sinop",
+      "universities": [
+        "Sinop Üniversitesi"
+      ]
+    },
+    {
+      "name": "Sivas",
+      "universities": [
+        "Sivas Cumhuriyet Üniversitesi"
+      ]
+    },
+    {
+      "name": "Şanlıurfa",
+      "universities": [
+        "Harran Üniversitesi",
+        "Şanlıurfa Gazi Üniversitesi"
+      ]
+    },
+    {
+      "name": "Şırnak",
+      "universities": [
+        "Şırnak Üniversitesi"
+      ]
+    },
+    {
+      "name": "Tekirdağ",
+      "universities": [
+        "Namık Kemal Üniversitesi",
+        "Tekirdağ Namık Kemal Üniversitesi"
+      ]
+    },
+    {
+      "name": "Tokat",
+      "universities": [
+        "Tokat Gaziosmanpaşa Üniversitesi"
+      ]
+    },
+    {
+      "name": "Trabzon",
+      "universities": [
+        "Karadeniz Teknik Üniversitesi",
+        "Trabzon Üniversitesi"
+      ]
+    },
+    {
+      "name": "Tunceli",
+      "universities": [
+        "Munzur Üniversitesi"
+      ]
+    },
+    {
+      "name": "Uşak",
+      "universities": [
+        "Uşak Üniversitesi"
+      ]
+    },
+    {
+      "name": "Van",
+      "universities": [
+        "Van Yüzüncü Yıl Üniversitesi"
+      ]
+    },
+    {
+      "name": "Yalova",
+      "universities": [
+        "Yalova Üniversitesi"
+      ]
+    },
+    {
+      "name": "Yozgat",
+      "universities": [
+        "Bozok Üniversitesi"
+      ]
+    },
+    {
+      "name": "Zonguldak",
+      "universities": [
+        "Zonguldak Bülent Ecevit Üniversitesi"
+      ]
+    }
+  ]
+}
