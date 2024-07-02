@@ -1,4 +1,4 @@
-import 'package:bootcamp_grup4/pages/home_page.dart';
+import 'package:bootcamp_grup4/pages/navigationpages.dart';
 import 'package:bootcamp_grup4/firebase/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class MainPage extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return HomePage();
+            return NavigationPage();
           }else{
             return LoginPage();
           }

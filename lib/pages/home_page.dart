@@ -1,3 +1,4 @@
+import 'package:bootcamp_grup4/utils/const.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -13,21 +14,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Ana Sayfa"),
-      ),
+      backgroundColor: bacgroundColor,
       body: Center(
         child:Column(mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("giriş yapılan hesap: ${user.email}"),
+            Text("Giriş Yapılan hesap ${user.email}"),
             MaterialButton(onPressed:(){
-              FirebaseAuth.instance.signOut();
+              FirebaseAuth.instance.signOut(); 
             },
             color: Colors.red,
             child: Text("Çıkış Yap"),
             ),
           ],
-        ),
+        )
       ),
     );
   }
