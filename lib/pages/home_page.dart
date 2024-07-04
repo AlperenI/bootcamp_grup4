@@ -1,6 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-
-import 'package:bootcamp_grup4/pages/settings_page.dart';
 import 'package:bootcamp_grup4/utils/const.dart';
 import 'package:bootcamp_grup4/utils/entry_widget.dart';
 import 'package:flutter/material.dart';
