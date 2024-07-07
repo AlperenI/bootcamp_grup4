@@ -13,6 +13,10 @@ UniApp
 ## Uygulama Açıklaması
 UniApp uygulamamız üniversiteye yeni başlamış ya da üniversitede okuyan öğrencilerin sosyalleştiği mekanları birbiriyle paylaştığı ve kendi okullarındaki insanlarla vakit geçirebileceği bir olanak sunuyor.
 ## Uygulama Özellikleri
+-Entryler ile kullanıcıların yeni içerikleri takip etmesi.
+-Favoriler ile kullanıcıların sevdiği entryleri yeniden görüntüleyebilmesi.
+-Dark-Light modu,kullanıcı profil değişikliği gibi ayarlama sayfası.
+-Entryler'in altında yorum yapabilme.
 ## Hedef Kitle
 - Üniveriste Öğrencileri
 # Sprint 1
