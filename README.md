@@ -11,6 +11,7 @@ UniApp
 ## Product Backlog URL
 [Flutter Takım 4 Trello Backlog Board](https://trello.com/b/JNUd1IcV/uniapp)
 ## Uygulama Açıklaması
+UniApp uygulamamız üniversiteye yeni başlamış ya da üniversitede okuyan öğrencilerin sosyalleştiği mekanları birbiriyle paylaştığı ve kendi okullarındaki insanlarla vakit geçirebileceği bir olanak sunuyor.
 ## Uygulama Özellikleri
 ## Hedef Kitle
 - Üniveriste Öğrencileri
