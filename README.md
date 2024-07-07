@@ -3,9 +3,9 @@ Flutter 4
 ## Takım Üyeleri
 - _**Ayşenur Navruz**_  - Scrum Master
 - _**Aziz Alperen Görmüş**_ - Product Owner
-- _**Bahri Karaduman**_ - Devoloper
-- _**Batuhan Aksüt**_ - Devoloper
-- _**Mediha Tuğba Geyik**_ - Devoloper
+- _**Bahri Karaduman**_ - Developer
+- _**Batuhan Aksüt**_ - Developer
+- _**Mediha Tuğba Geyik**_ - Developer
 ## Uygulama İsmi
 UniApp
 ## Product Backlog URL
