@@ -24,6 +24,7 @@ UniApp uygulamamız üniversiteye yeni başlamış ya da üniversitede okuyan ö
 - **Puan tamamlama mantığı:** Proje boyunca tamamlanması beklenen backlog puanı 26'dır. İlk Sprint için tamamlanması gereken puan sayısı 8 olarak belirlenmiştir ve hedefe ulaşılmıştır.
 - **Daily Scrum:** Whatsapp üzerinden görüşmeler sağlanmıştır.
 Toplantı ve Whatsapp ScreenShotları Word dosyasında Readme dosyasına eklenmiştir.
+ [WhatSapp](DailyScrumEkranGörüntüleri.docx)
 
 - **Sprint Board Update:**
  ![image](https://github.com/AlperenI/bootcamp_grup4/assets/120336541/4670d3dd-8a2e-456d-b8a0-2825b8467646)
@@ -40,7 +41,13 @@ Toplantı ve Whatsapp ScreenShotları Word dosyasında Readme dosyasına eklenmi
 
 
 ### Sprint Review:
+- Uygulama tasarımına karar verilmiştir.
+- Firebase servislerine bağlantıları yapılmış ve tamamlanamayan bağlantılar üzerine konuşulmuştur.
+- Veri seti oluşturulmuştur.
 ### Sprint Retrospective:
+- Takım içindeki görev dağılımları ile ilgili düzenlemeler yapılmıştır.
+- Uygulama tasarımında değişikliğie gidilme kararı alınmıştır.
+- Yoğunluğu olan katılımcıların gelecek sprintlerde aktiflik durumlarına göre görev paylaşımı yapılmıştır.
 
 
 
