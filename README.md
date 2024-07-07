@@ -21,7 +21,7 @@ UniApp uygulamamız üniversiteye yeni başlamış ya da üniversitede okuyan ö
 - Üniveriste Öğrencileri
 # Sprint 1
 - **Sprint içinde tahmin edilen puan:** 8
-- **Puan tamamlama mantığı:** Proje boyunca tamamlanması beklenen backlog puanı 26'dır. İlk Sprint için tamamlanması gereken puan sayısı 8 olarak belirlenmiştir ve hedefe ulaşılmıştır.
+- **Puan tamamlama mantığı:** Proje boyunca tamamlanması beklenen backlog puanı 26'dır. İlk Sprint için tamamlanması gereken puan sayısı 8 olarak belirlenmiştir.
 - **Daily Scrum:** Whatsapp üzerinden görüşmeler sağlanmıştır.
 Toplantı ve Whatsapp ScreenShotları Word dosyasında Readme dosyasına eklenmiştir.
  [WhatSapp](DailyScrumEkranGörüntüleri.docx)
