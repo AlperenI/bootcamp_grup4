@@ -39,7 +39,23 @@ Toplantı ve Whatsapp ScreenShotları Word dosyasında Readme dosyasına eklenmi
 ![image](https://github.com/AlperenI/bootcamp_grup4/assets/120336541/433572ac-1743-4125-8535-96b454756bb1)
 
 
-
+### Sprint Notları:
+#### Günlük Scrum Toplantıları:
+- Her gün Whatsapp üzerinden günlük bilgilendirme şeklinde yapıldı.
+- Günlük ilerlemeler ve engeller tartışıldı.
+- Her takım üyesi kendi görevleri hakkında bilgi verdi ve yardıma ihtiyaç duyduğu konuları belirtti.
+#### Sprint Boyunca Karşılaşılan Zorluklar:
+- Firebase bağlantısında bazı teknik sorunlar yaşandı ve çözüm için ek süre gerekti.
+- Veri seti oluşturma sürecinde beklenenden daha fazla zaman harcandı.
+#### Çözümler:
+- Firebase bağlantısı için tüm takım beyin fırtınası yaptı ve sorun çözüldü.
+- Veri seti oluşturma sürecini hızlandırmak için yeni bir strateji belirlendi.
+#### Takım İçi İletişim: 
+- Takım üyeleri arasında etkili iletişim sağlandı.
+- Whatsapp üzerinden hızlı bilgi alışverişi yapıldı.
+#### Diğer Notlar:
+- Gelecek sprintlerde belirli görevlerin yeniden değerlendirilmesi ve daha net tanımlanması gerektiği tespit edildi.
+- Sprint sonlarında düzenli olarak retrospective toplantıları yapılmasının önemi vurgulandı.
 ### Sprint Review:
 - Uygulama tasarımına karar verilmiştir.
 - Firebase servislerine bağlantıları yapılmış ve tamamlanamayan bağlantılar üzerine konuşulmuştur.
