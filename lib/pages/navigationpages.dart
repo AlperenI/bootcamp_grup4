@@ -31,9 +31,9 @@ class _NavigationPageState extends State<NavigationPage> {
         },
         currentIndex: currentindex,
         items: [
-          BottomNavigationBarItem(label: "Home",icon:Icon(Icons.home_outlined)),
-          BottomNavigationBarItem(label: "Favorite",icon:Icon(Icons.favorite_rounded)),
-          BottomNavigationBarItem(label: "Settings",icon:Icon(Icons.settings)),
+          BottomNavigationBarItem(label: "Ana Sayfa",icon:Icon(Icons.home_outlined)),
+          BottomNavigationBarItem(label: "Favoriler",icon:Icon(Icons.favorite_rounded)),
+          BottomNavigationBarItem(label: "Ayarlar",icon:Icon(Icons.settings)),
           ],
         ),
     );

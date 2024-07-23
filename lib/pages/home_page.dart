@@ -47,11 +47,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Future<void> _pickImage() async {
+  Future<void> _pickImage(StateSetter setDialogState) async {
     try {
       final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
       if (pickedFile != null) {
-        setState(() {
+        setDialogState(() {
           _image = File(pickedFile.path);
         });
       }
@@ -78,52 +78,67 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(
-          builder: (context, setState) {
+          builder: (context, setDialogState) {
             return AlertDialog(
+              backgroundColor: bacgroundColor,
               title: Text('Başlık ve Yazı Girin'),
               content: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _image == null
-                        ? Text('Resim seçilmedi.')
-                        : Image.file(_image!),
-                    SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: _pickImage,
-                      child: Text('Fotoğraf Seç'),
-                    ),
-                    SizedBox(height: 10),
-                    TextField(
-                      controller: _titleController,
-                      decoration: InputDecoration(
-                        hintText: 'Başlık',
-                        border: OutlineInputBorder(),
-                        errorText: _titleError ? 'Başlık gerekli' : null,
+                child: Container(
+                  width: MediaQuery.of(context).size.width *1,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _image == null
+                          ? Text('Fotoğraf seçilmedi.')
+                          : Image.file(_image!, fit: BoxFit.cover, height: 300), // Resim boyutu küçültüldü
+                      SizedBox(height: 10),
+                      ElevatedButton(
+                        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.redAccent)),
+                        onPressed: () => _pickImage(setDialogState),
+                        child: Text('Fotoğraf Seçin', style: TextStyle(color: Colors.black)),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    TextField(
-                      controller: _descriptionController,
-                      decoration: InputDecoration(
-                        hintText: 'Yazı',
-                        border: OutlineInputBorder(),
-                        errorText: _descriptionError ? 'Yazı gerekli' : null,
+                      SizedBox(height: 10),
+                      TextField(
+                        controller: _titleController,
+                        decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 1.5)),
+                          focusColor: Colors.brown,
+                          hintText: 'Başlığınız',
+                          border: OutlineInputBorder(),
+                          errorText: _titleError ? 'Başlık gerekli' : null,
+                        ),
                       ),
-                      maxLines: 3,
-                    ),
-                  ],
+                      SizedBox(height: 10),
+                      TextField(
+                        controller: _descriptionController,
+                        decoration: InputDecoration(
+                         focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 1.5)),
+                         focusColor: Colors.brown,
+                          hintText: 'Yazınız',
+                          border: OutlineInputBorder(),
+                          errorText: _descriptionError ? 'Yazı gerekli' : null,
+                        ),
+                        minLines: 10,
+                        maxLines: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               actions: [
                 TextButton(
-                  child: Text('Kapat'),
+                  child: Text('Kapat',style: TextStyle(color: Colors.brown),),
                   onPressed: () {
+                    _titleController.clear();
+                    _descriptionController.clear();
+                    setState(() {
+                      _image = null; // Resmi kaldır
+                    });
                     Navigator.of(context).pop();
                   },
                 ),
                 TextButton(
-                  child: _isLoading ? CircularProgressIndicator() : Text('Kaydet'),
+                  child: _isLoading ? CircularProgressIndicator() : Text('Kaydet',style: TextStyle(color: Colors.brown),),
                   onPressed: _isLoading ? null : () async {
                     setState(() {
                       _titleError = _titleController.text.isEmpty;
@@ -167,11 +182,11 @@ class _HomePageState extends State<HomePage> {
         elevation: 1,
         toolbarHeight: 40,
         centerTitle: true,
-        backgroundColor:bacgroundColor,
+        backgroundColor: bacgroundColor,
         title: Text("Ana Sayfa", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
         iconTheme: IconThemeData(color: Colors.black),
       ),
-      backgroundColor:bacgroundColor,
+      backgroundColor: bacgroundColor,
       body: _entries.isEmpty
         ? Center(child: CircularProgressIndicator())
         : ListView.builder(

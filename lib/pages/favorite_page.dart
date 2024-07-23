@@ -3,8 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:bootcamp_grup4/utils/entry_widget.dart'; // Entry widget'ınızı buraya import edin
-import 'package:bootcamp_grup4/utils/const.dart'; // `bacgroundColor` tanımını buradan içe aktarın
+import 'package:bootcamp_grup4/utils/entry_widget.dart'; 
+import 'package:bootcamp_grup4/utils/const.dart';
 
 class FavoritePage extends StatelessWidget {
   const FavoritePage({Key? key}) : super(key: key);
@@ -16,7 +16,10 @@ class FavoritePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: bacgroundColor,
       appBar: AppBar(
-        title: Text('Favorilerim'),
+        iconTheme:  IconThemeData(color: Colors.black),
+        toolbarHeight: 40,
+        centerTitle: true,
+        title: Text('Favorilerim',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
         backgroundColor: bacgroundColor,
       ),
       body: userId == null
@@ -37,7 +40,7 @@ class FavoritePage extends StatelessWidget {
                 }
 
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return Center(child: Text('Favori entry bulunamadı.'));
+                  return Center(child: Text('Henüz burada bir şey yok.'));
                 }
 
                 final entries = snapshot.data!.docs;

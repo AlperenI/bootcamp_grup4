@@ -19,10 +19,11 @@ class EntryPage extends StatelessWidget {
       backgroundColor:bacgroundColor,
       appBar: AppBar(
         elevation: 1,
-        toolbarHeight: 55,
+        toolbarHeight: 40,
         centerTitle: true,
-        backgroundColor: Colors.blueGrey,
-        title: Text(title),
+        backgroundColor:bacgroundColor,
+        title: Text(title,style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+        iconTheme: IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -53,8 +54,8 @@ class EntryPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Text(
-                description,
-                style: TextStyle(fontSize: 18, height: 1.5),
+                "   $description",
+                style: TextStyle(fontSize: 18, height:2,fontStyle: FontStyle.italic,fontWeight: FontWeight.w500),
               ),
             ],
           ),
