@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+import 'dart:async';
 import 'dart:io';
 import 'package:bootcamp_grup4/utils/const.dart';
 import 'package:bootcamp_grup4/utils/entry_widget.dart';
@@ -15,12 +15,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-    final ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
   File? _image;
   TextEditingController _titleController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
   bool _titleError = false;
   bool _descriptionError = false;
+  bool _isLoading = false;
+  List<QueryDocumentSnapshot> _entries = [];
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchEntries();
+    _timer = Timer.periodic(Duration(seconds: 50), (timer) {
+      _fetchEntries();
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> _fetchEntries() async {
+    final snapshot = await FirebaseFirestore.instance.collection('entries').get();
+    setState(() {
+      _entries = snapshot.docs;
+    });
+  }
 
   Future<void> _pickImage() async {
     try {
@@ -32,6 +57,19 @@ class _HomePageState extends State<HomePage> {
       }
     } catch (e) {
       print("Image picker error: $e");
+    }
+  }
+
+  Future<String?> _uploadImageToStorage(File imageFile) async {
+    try {
+      final storageRef = FirebaseStorage.instance.ref().child('images/${DateTime.now().toIso8601String()}');
+      final uploadTask = storageRef.putFile(imageFile);
+      final snapshot = await uploadTask.whenComplete(() => {});
+      final imageUrl = await snapshot.ref.getDownloadURL();
+      return imageUrl;
+    } catch (e) {
+      print("Image upload error: $e");
+      return null;
     }
   }
 
@@ -85,28 +123,31 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
                 TextButton(
-                  child: Text('Kaydet'),
-                  onPressed: () async {
+                  child: _isLoading ? CircularProgressIndicator() : Text('Kaydet'),
+                  onPressed: _isLoading ? null : () async {
                     setState(() {
                       _titleError = _titleController.text.isEmpty;
                       _descriptionError = _descriptionController.text.isEmpty;
                     });
 
                     if (!_titleError && !_descriptionError) {
-                      // Firestore'a veri ekleme
+                      setState(() {
+                        _isLoading = true;
+                      });
+
                       await FirebaseFirestore.instance.collection('entries').add({
                         'title': _titleController.text,
                         'description': _descriptionController.text,
-                        'image_url': _image != null
-                          ? await _uploadImageToStorage(_image!) // Resim yükleme
-                          : null,
+                        'image_url': _image != null ? await _uploadImageToStorage(_image!) : null,
                       });
 
                       setState(() {
                         _titleController.clear();
                         _descriptionController.clear();
                         _image = null;
+                        _isLoading = false;
                       });
+                      _fetchEntries();
                       Navigator.of(context).pop();
                     }
                   },
@@ -118,47 +159,25 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
-Future<String?> _uploadImageToStorage(File imageFile) async {
-  try {
-    final storageRef = FirebaseStorage.instance.ref().child('images/${DateTime.now().toIso8601String()}');
-    final uploadTask = storageRef.putFile(imageFile);
-    final snapshot = await uploadTask.whenComplete(() => {});
-    final imageUrl = await snapshot.ref.getDownloadURL();
-    return imageUrl;
-  } catch (e) {
-    print("Image upload error: $e");
-    return null;
-  }
-}
+
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
         toolbarHeight: 40,
         centerTitle: true,
         backgroundColor:bacgroundColor,
-        title: Text("Ana Sayfa",style: TextStyle(fontWeight: FontWeight.bold),),
+        title: Text("Ana Sayfa", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+        iconTheme: IconThemeData(color: Colors.black),
       ),
-      backgroundColor: bacgroundColor,
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('entries').snapshots(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          }
-
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return Center(child: Text('Veri bulunamadı.'));
-          }
-
-          final entries = snapshot.data!.docs;
-
-          return ListView.builder(
-            itemCount: entries.length,
+      backgroundColor:bacgroundColor,
+      body: _entries.isEmpty
+        ? Center(child: CircularProgressIndicator())
+        : ListView.builder(
+            itemCount: _entries.length,
             itemBuilder: (context, index) {
-              final entry = entries[index].data() as Map<String, dynamic>;
+              final entry = _entries[index].data() as Map<String, dynamic>;
               final title = entry['title'] ?? '';
               final description = entry['description'] ?? '';
               final imageUrl = entry['image_url'] as String?;
@@ -166,15 +185,15 @@ Future<String?> _uploadImageToStorage(File imageFile) async {
               return Entry(
                 title: title,
                 description: description,
-                imageFile: imageUrl != null ? File(imageUrl) : null,
+                imageUrl: imageUrl,
               );
             },
-          );
-        },
-      ),
+          ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.brown,
+        foregroundColor: Colors.white,
         onPressed: _showAlertDialog,
-        child: Icon(Icons.add),
+        child: Icon(Icons.create_outlined),
       ),
     );
   }

@@ -1,23 +1,26 @@
-import 'package:bootcamp_grup4/utils/const.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
 
 class EntryPage extends StatelessWidget {
   final String title;
   final String description;
-  final File? imageFile;
+  final String? imageUrl;
 
-  const EntryPage({Key? key, required this.title, required this.description, this.imageFile}) : super(key: key);
+  const EntryPage({
+    Key? key,
+    required this.title,
+    required this.description,
+    this.imageUrl,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bacgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 1,
         toolbarHeight: 55,
         centerTitle: true,
-        backgroundColor:bacgroundColor,
+        backgroundColor: Colors.blueGrey,
         title: Text(title),
       ),
       body: SingleChildScrollView(
@@ -26,19 +29,31 @@ class EntryPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (imageFile != null) 
+              if (imageUrl != null)
                 Center(
-                  child: Image.file(imageFile!),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: FadeInImage.assetNetwork(
+                      placeholder: 'assets/placeholder.png', // Yer tutucu resim
+                      image: imageUrl!,
+                      height: 230,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      imageErrorBuilder: (context, error, stackTrace) {
+                        return Center(child: Icon(Icons.error, size: 50, color: Colors.red));
+                      },
+                    ),
+                  ),
                 ),
               SizedBox(height: 20),
               Text(
                 title,
-                style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold,color:Colors.red),
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.red),
               ),
               SizedBox(height: 20),
               Text(
                 description,
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 18, height: 1.5),
               ),
             ],
           ),

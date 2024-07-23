@@ -1,19 +1,64 @@
-import 'package:bootcamp_grup4/utils/const.dart';
+// ignore_for_file: prefer_const_constructors
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:bootcamp_grup4/utils/entry_widget.dart'; // Entry widget'ınızı buraya import edin
+import 'package:bootcamp_grup4/utils/const.dart'; // `bacgroundColor` tanımını buradan içe aktarın
 
-class FavoritePage extends StatefulWidget {
-  const FavoritePage({super.key});
+class FavoritePage extends StatelessWidget {
+  const FavoritePage({Key? key}) : super(key: key);
 
-  @override
-  State<FavoritePage> createState() => _FavoritePageState();
-}
-
-class _FavoritePageState extends State<FavoritePage> {
   @override
   Widget build(BuildContext context) {
+    final userId = FirebaseAuth.instance.currentUser?.uid;
+
     return Scaffold(
       backgroundColor: bacgroundColor,
-      body: Center(child: Text("Favorite Page")),
+      appBar: AppBar(
+        title: Text('Favorilerim'),
+        backgroundColor: bacgroundColor,
+      ),
+      body: userId == null
+          ? Center(child: Text('Giriş yapmanız gerekiyor.'))
+          : StreamBuilder<QuerySnapshot>(
+              stream: FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(userId)
+                  .collection('favorites')
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+
+                if (snapshot.hasError) {
+                  return Center(child: Text('Bir hata oluştu: ${snapshot.error}'));
+                }
+
+                if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                  return Center(child: Text('Favori entry bulunamadı.'));
+                }
+
+                final entries = snapshot.data!.docs;
+
+                return ListView.builder(
+                  itemCount: entries.length,
+                  itemBuilder: (context, index) {
+                    final entry = entries[index].data() as Map<String, dynamic>;
+                    final title = entry['title'] ?? '';
+                    final description = entry['description'] ?? '';
+                    final imageUrl = entry['image_url'] as String?;
+
+                    return Entry(
+                      title: title,
+                      description: description,
+                      imageUrl: imageUrl, // imageUrl'yi File yerine doğrudan geçiyoruz
+                    );
+                  },
+                );
+              },
+            ),
     );
   }
 }
