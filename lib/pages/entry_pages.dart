@@ -1,3 +1,4 @@
+import 'package:bootcamp_grup4/utils/const.dart';
 import 'package:flutter/material.dart';
 
 class EntryPage extends StatelessWidget {
@@ -15,7 +16,7 @@ class EntryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor:bacgroundColor,
       appBar: AppBar(
         elevation: 1,
         toolbarHeight: 55,
