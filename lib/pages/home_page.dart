@@ -26,7 +26,10 @@ class _HomePageState extends State<HomePage> {
   List<QueryDocumentSnapshot> _entries = [];
   List<QueryDocumentSnapshot> _filteredEntries = [];
   Timer? _timer;
-
+  bool _isValidDescription(String description) {
+  final validCharacters = description.replaceAll(RegExp(r'\s+'), '');
+  return validCharacters.length >= 20;
+}
   @override
   void initState() {
     super.initState();
@@ -44,6 +47,7 @@ class _HomePageState extends State<HomePage> {
     _searchController.dispose();
     super.dispose();
   }
+  
 
   Future<void> _fetchEntries() async {
     final snapshot = await FirebaseFirestore.instance.collection('entries').get();
@@ -88,11 +92,6 @@ class _HomePageState extends State<HomePage> {
       return null;
     }
   }
-bool _isValidDescription(String description) {
-  final validCharacters = description.replaceAll(RegExp(r'\s+'), '');
-  return validCharacters.length >= 20;
-}
-
 void _showAlertDialog() {
   showDialog(
     context: context,
