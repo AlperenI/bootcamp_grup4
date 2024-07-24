@@ -16,13 +16,20 @@ class EntryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:bacgroundColor,
+      backgroundColor: bacgroundColor,
       appBar: AppBar(
         elevation: 1,
         toolbarHeight: 40,
         centerTitle: true,
-        backgroundColor:bacgroundColor,
-        title: Text(title,style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+        backgroundColor: bacgroundColor,
+        title: Text(
+          title,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 20,
+          ),
+        ),
         iconTheme: IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
@@ -34,7 +41,7 @@ class EntryPage extends StatelessWidget {
               if (imageUrl != null)
                 Center(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(15),
                     child: FadeInImage.assetNetwork(
                       placeholder: 'assets/placeholder.png', // Yer tutucu resim
                       image: imageUrl!,
@@ -42,7 +49,13 @@ class EntryPage extends StatelessWidget {
                       width: double.infinity,
                       fit: BoxFit.cover,
                       imageErrorBuilder: (context, error, stackTrace) {
-                        return Center(child: Icon(Icons.error, size: 50, color: Colors.red));
+                        return Center(
+                          child: Icon(
+                            Icons.error,
+                            size: 50,
+                            color: Colors.red,
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -50,12 +63,38 @@ class EntryPage extends StatelessWidget {
               SizedBox(height: 20),
               Text(
                 title,
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.red),
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.redAccent,
+                  letterSpacing: 1.2,
+                ),
               ),
               SizedBox(height: 20),
-              Text(
-                "   $description",
-                style: TextStyle(fontSize: 18, height:2,fontStyle: FontStyle.italic,fontWeight: FontWeight.w500),
+              Container(
+                
+                padding: const EdgeInsets.all(12.0),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.7),
+                  borderRadius: BorderRadius.circular(5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 10,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
+                ),
+                child: Text(textAlign: TextAlign.center,
+                  "  $description",
+                  style: TextStyle(
+                    fontSize: 18,
+                    height: 1.3,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black87,
+                  ),
+                ),
               ),
             ],
           ),
