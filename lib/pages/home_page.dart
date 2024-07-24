@@ -19,10 +19,12 @@ class _HomePageState extends State<HomePage> {
   File? _image;
   TextEditingController _titleController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
+  TextEditingController _searchController = TextEditingController();
   bool _titleError = false;
   bool _descriptionError = false;
   bool _isLoading = false;
   List<QueryDocumentSnapshot> _entries = [];
+  List<QueryDocumentSnapshot> _filteredEntries = [];
   Timer? _timer;
 
   @override
@@ -32,11 +34,14 @@ class _HomePageState extends State<HomePage> {
     _timer = Timer.periodic(Duration(seconds: 50), (timer) {
       _fetchEntries();
     });
+    _searchController.addListener(_filterEntries);
   }
 
   @override
   void dispose() {
     _timer?.cancel();
+    _searchController.removeListener(_filterEntries);
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -44,6 +49,17 @@ class _HomePageState extends State<HomePage> {
     final snapshot = await FirebaseFirestore.instance.collection('entries').get();
     setState(() {
       _entries = snapshot.docs;
+      _filteredEntries = _entries;
+    });
+  }
+
+  void _filterEntries() {
+    setState(() {
+      _filteredEntries = _entries.where((entry) {
+        final title = entry['title']?.toLowerCase() ?? '';
+        final query = _searchController.text.toLowerCase();
+        return title.contains(query);
+      }).toList();
     });
   }
 
@@ -72,127 +88,155 @@ class _HomePageState extends State<HomePage> {
       return null;
     }
   }
+bool _isValidDescription(String description) {
+  final validCharacters = description.replaceAll(RegExp(r'\s+'), '');
+  return validCharacters.length >= 20;
+}
 
-  void _showAlertDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (context, setDialogState) {
-            return AlertDialog(
-              backgroundColor: bacgroundColor,
-              title: Text('Başlık ve Yazı Girin'),
-              content: SingleChildScrollView(
-                child: Container(
-                  width: MediaQuery.of(context).size.width *1,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _image == null
-                          ? Text('Fotoğraf seçilmedi.')
-                          : Image.file(_image!, fit: BoxFit.cover, height: 300), // Resim boyutu küçültüldü
-                      SizedBox(height: 10),
-                      ElevatedButton(
-                        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.redAccent)),
-                        onPressed: () => _pickImage(setDialogState),
-                        child: Text('Fotoğraf Seçin', style: TextStyle(color: Colors.black)),
+void _showAlertDialog() {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return StatefulBuilder(
+        builder: (context, setDialogState) {
+          return AlertDialog(
+            backgroundColor: bacgroundColor,
+            title: Text('Başlık ve Yazı Girin'),
+            content: SingleChildScrollView(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _image == null
+                        ? Text('Fotoğraf seçilmedi.')
+                        : Image.file(_image!, fit: BoxFit.cover, height: 300),
+                    SizedBox(height: 10),
+                    ElevatedButton(
+                      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.redAccent)),
+                      onPressed: () => _pickImage(setDialogState),
+                      child: Text('Fotoğraf Seçin', style: TextStyle(color: Colors.black)),
+                    ),
+                    SizedBox(height: 10),
+                    TextField(
+                      controller: _titleController,
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 1.5)),
+                        focusColor: Colors.brown,
+                        hintText: 'Başlığınız',
+                        border: OutlineInputBorder(),
+                        errorText: _titleError ? 'Başlık gerekli' : null,
                       ),
-                      SizedBox(height: 10),
-                      TextField(
-                        controller: _titleController,
-                        decoration: InputDecoration(
-                          focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 1.5)),
-                          focusColor: Colors.brown,
-                          hintText: 'Başlığınız',
-                          border: OutlineInputBorder(),
-                          errorText: _titleError ? 'Başlık gerekli' : null,
-                        ),
+                    ),
+                    SizedBox(height: 10),
+                    TextField(
+                      controller: _descriptionController,
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 1.5)),
+                        focusColor: Colors.brown,
+                        hintText: 'Yazınız (minimum 20 karakter)',
+                        border: OutlineInputBorder(),
+                        errorText: _descriptionError ? 'Yazı en az 20 karakter olmalı' : null,
                       ),
-                      SizedBox(height: 10),
-                      TextField(
-                        controller: _descriptionController,
-                        decoration: InputDecoration(
-                         focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 1.5)),
-                         focusColor: Colors.brown,
-                          hintText: 'Yazınız',
-                          border: OutlineInputBorder(),
-                          errorText: _descriptionError ? 'Yazı gerekli' : null,
-                        ),
-                        minLines: 10,
-                        maxLines: 20,
-                      ),
-                    ],
-                  ),
+                      minLines: 10,
+                      maxLines: 20,
+                    ),
+                  ],
                 ),
               ),
-              actions: [
-                TextButton(
-                  child: Text('Kapat',style: TextStyle(color: Colors.brown),),
-                  onPressed: () {
-                    _titleController.clear();
-                    _descriptionController.clear();
-                    setState(() {
-                      _image = null; // Resmi kaldır
-                    });
-                    Navigator.of(context).pop();
-                  },
-                ),
-                TextButton(
-                  child: _isLoading ? CircularProgressIndicator() : Text('Kaydet',style: TextStyle(color: Colors.brown),),
-                  onPressed: _isLoading ? null : () async {
-                    setState(() {
-                      _titleError = _titleController.text.isEmpty;
-                      _descriptionError = _descriptionController.text.isEmpty;
-                    });
+            ),
+            actions: [
+              TextButton(
+                child: Text('Kapat', style: TextStyle(color: Colors.brown)),
+                onPressed: () {
+                  _titleController.clear();
+                  _descriptionController.clear();
+                  setState(() {
+                    _image = null;
+                  });
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: _isLoading
+                    ? CircularProgressIndicator()
+                    : Text('Kaydet', style: TextStyle(color: Colors.brown)),
+                onPressed: _isLoading
+                    ? null
+                    : () async {
+                        setDialogState(() {
+                          _titleError = _titleController.text.isEmpty;
+                          _descriptionError = !_isValidDescription(_descriptionController.text);
+                        });
 
-                    if (!_titleError && !_descriptionError) {
-                      setState(() {
-                        _isLoading = true;
-                      });
+                        if (!_titleError && !_descriptionError) {
+                          setDialogState(() {
+                            _isLoading = true;
+                          });
 
-                      await FirebaseFirestore.instance.collection('entries').add({
-                        'title': _titleController.text,
-                        'description': _descriptionController.text,
-                        'image_url': _image != null ? await _uploadImageToStorage(_image!) : null,
-                      });
+                          await FirebaseFirestore.instance.collection('entries').add({
+                            'title': _titleController.text,
+                            'description': _descriptionController.text,
+                            'image_url': _image != null ? await _uploadImageToStorage(_image!) : null,
+                          });
 
-                      setState(() {
-                        _titleController.clear();
-                        _descriptionController.clear();
-                        _image = null;
-                        _isLoading = false;
-                      });
-                      _fetchEntries();
-                      Navigator.of(context).pop();
-                    }
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      },
-    );
-  }
+                          setState(() {
+                            _titleController.clear();
+                            _descriptionController.clear();
+                            _image = null;
+                            _isLoading = false;
+                          });
+                          _fetchEntries();
+                          Navigator.of(context).pop();
+                        }
+                      },
+              ),
+            ],
+          );
+        },
+      );
+    },
+  );
+}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
-        toolbarHeight: 40,
+        toolbarHeight: 45,
         centerTitle: true,
         backgroundColor: bacgroundColor,
         title: Text("Ana Sayfa", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
         iconTheme: IconThemeData(color: Colors.black),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(55.0),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),borderSide: BorderSide(width: 2)),
+                focusColor: Colors.brown,
+                hintText: 'Arama...',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+                filled: true,
+                fillColor: Colors.white,
+                prefixIcon: Icon(Icons.search),
+              ),
+            ),
+          ),
+        ),
       ),
       backgroundColor: bacgroundColor,
-      body: _entries.isEmpty
+      body: _filteredEntries.isEmpty
         ? Center(child: CircularProgressIndicator())
         : ListView.builder(
-            itemCount: _entries.length,
+            itemCount: _filteredEntries.length,
             itemBuilder: (context, index) {
-              final entry = _entries[index].data() as Map<String, dynamic>;
+              final entry = _filteredEntries[index].data() as Map<String, dynamic>;
               final title = entry['title'] ?? '';
               final description = entry['description'] ?? '';
               final imageUrl = entry['image_url'] as String?;
