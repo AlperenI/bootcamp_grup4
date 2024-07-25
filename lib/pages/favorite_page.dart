@@ -39,6 +39,10 @@ class _FavoritePageState extends State<FavoritePage> {
     });
   }
 
+  Future<void> _delayedFuture() async {
+    await Future.delayed(Duration(milliseconds: 250));
+  }
+
   @override
   Widget build(BuildContext context) {
     final userId = FirebaseAuth.instance.currentUser?.uid;
@@ -58,7 +62,7 @@ class _FavoritePageState extends State<FavoritePage> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),borderSide: BorderSide(width: 2)),
+                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(width: 2)),
                 focusColor: Colors.brown,
                 hintText: 'Arama...',
                 border: OutlineInputBorder(
@@ -92,22 +96,31 @@ class _FavoritePageState extends State<FavoritePage> {
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                   return Center(child: Text('Henüz burada bir şey yok.'));
                 }
-
+                
                 _entries = snapshot.data!.docs;
-                _filteredEntries = _filteredEntries.isNotEmpty ? _filteredEntries : _entries;
+                _filteredEntries = _searchController.text.isNotEmpty ? _filteredEntries : _entries;
 
-                return ListView.builder(
-                  itemCount: _filteredEntries.length,
-                  itemBuilder: (context, index) {
-                    final entry = _filteredEntries[index].data() as Map<String, dynamic>;
-                    final title = entry['title'] ?? '';
-                    final description = entry['description'] ?? '';
-                    final imageUrl = entry['image_url'] as String?;
+                return FutureBuilder<void>(
+                  future: _delayedFuture(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    }
 
-                    return Entry(
-                      title: title,
-                      description: description,
-                      imageUrl: imageUrl,
+                    return ListView.builder(
+                      itemCount: _filteredEntries.length,
+                      itemBuilder: (context, index) {
+                        final entry = _filteredEntries[index].data() as Map<String, dynamic>;
+                        final title = entry['title'] ?? '';
+                        final description = entry['description'] ?? '';
+                        final imageUrl = entry['image_url'] as String?;
+
+                        return Entry(
+                          title: title,
+                          description: description,
+                          imageUrl: imageUrl,
+                        );
+                      },
                     );
                   },
                 );
