@@ -18,6 +18,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String? _selectedCity;
   List<String> _universities = [];
   String? _selectedUniversity;
+  String? errorMessage; // Hata mesajı için değişken
 
   @override
   void initState() {
@@ -41,11 +42,26 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future signUp() async {
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: _emailcontroller.text.trim(),
-      password: _passwordcontroller.text.trim(),
-    );
-    Navigator.pop(context);
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailcontroller.text.trim(),
+        password: _passwordcontroller.text.trim(),
+      );
+      setState(() {
+        errorMessage = null; // Başarılı kayıt işleminde hata mesajını temizle
+      });
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        setState(() {
+          errorMessage = 'Bu mail kullanılamaz'; // Hata mesajını ayarla
+        });
+      } else {
+        setState(() {
+          errorMessage = 'Bir hata oluştu. Lütfen tekrar deneyin.';
+        });
+      }
+    }
   }
 
   @override
@@ -74,7 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   controller: _emailcontroller,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: "email",
+                    hintText: "Email",
                   ),
                 ),
               ),
@@ -96,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   obscureText: true,
                   decoration: InputDecoration(
                     border: InputBorder.none,
-                    hintText: "şifre",
+                    hintText: "Şifre",
                   ),
                 ),
               ),
@@ -120,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   _universities = _cities
                       .firstWhere((city) => city['name'] == value)['universities']
                       .cast<String>();
-                  _selectedUniversity = null; // Reset university selection
+                  _selectedUniversity = null; // Üniversite seçimlerini sıfırla
                 });
               },
               decoration: InputDecoration(
@@ -158,9 +174,7 @@ class _RegisterPageState extends State<RegisterPage> {
           SizedBox(height: 10),
           GestureDetector(
             onTap: () {
-              setState(() {
-                signUp();
-              });
+              signUp();
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -183,6 +197,15 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
           ),
+          SizedBox(height: 15),
+          if (errorMessage != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: Text(
+                errorMessage!,
+                style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+              ),
+            ),
           SizedBox(height: 15),
         ],
       ),
