@@ -129,7 +129,6 @@ Toplantı ve Whatsapp ScreenShotları Word dosyasında Readme dosyasına eklenmi
 #### Takım İçi İletişim: 
 - Takım üyeleri arasında etkili iletişim sağlandı.
 - Whatsapp üzerinden hızlı bilgi alışverişi yapıldı.
-### diğer
 ### Sprint Review:
 - Scrum boyunca özveriyle çalışıdığı için takım üyeleri birbirini tebrik etti.
 - Tamamlanması gereken 26 puanlık backlog puanı tamamlanmıştır.
