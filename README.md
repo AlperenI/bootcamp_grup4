@@ -69,7 +69,7 @@ Toplantı ve Whatsapp ScreenShotları Word dosyasında Readme dosyasına eklenmi
 # Sprint 2
 
 - **Sprint içinde tahmin edilen puan:** 8
--  **Puan tamamlama mantığı:** Proje boyunca tamamlanması beklenen backlog puanı 26'dır. İlk Sprint için tamamlanması gereken puan sayısı 8 olarak belirlenmiştir.
+-  **Puan tamamlama mantığı:** Proje boyunca tamamlanması beklenen backlog puanı 26'dır. İkinci Sprint için tamamlanması gereken puan sayısı 8 olarak belirlenmiştir.
 - **Daily Scrum:** Whatsapp üzerinden görüşmeler sağlanmıştır.
 Toplantı ve Whatsapp ScreenShotları Word dosyasında Readme dosyasına eklenmiştir.
  [WhatSapp](DailyScrumEkranGörüntüleri.docx)
@@ -104,6 +104,43 @@ Toplantı ve Whatsapp ScreenShotları Word dosyasında Readme dosyasına eklenmi
 ### Sprint Retrospective:
 - Takım içindeki görev dağılımları ile ilgili düzenlemeler yapılmıştır.
 - Yoğunluğu olan katılımcıların gelecek sprintlerde aktiflik durumlarına göre görev paylaşımı yapılmıştır.
+
+# Sprint 3
+- **Sprint içinde tahmin edilen puan:** 10
+- **Puan tamamlama mantığı:** Proje boyunca tamamlanması beklenen backlog puanı 26'dır. Üçüncü Sprint için tamamlanması gereken puan sayısı 10 olarak belirlenmiştir.
+- **Daily Scrum:** Whatsapp üzerinden görüşmeler sağlanmıştır.
+Toplantı ve Whatsapp ScreenShotları Word dosyasında Readme dosyasına eklenmiştir.
+ [WhatSapp](DailyScrumEkranGörüntüleri.docx)
+
+- **Sprint Board Update:**
+![image](https://github.com/user-attachments/assets/99d5c7e1-b5ae-4d6d-a10f-0de57f1df3fc)
+
+- **Ürün Durumu:**
+- ![image](https://github.com/AlperenI/bootcamp_grup4/assets/120336541/b2c1dc29-dbd2-4153-bcf0-8a17b7d901ef)
+- ![image](https://github.com/user-attachments/assets/182a88e3-d9b0-4381-bc2c-5f9c9a0f4596)
+- ![image](https://github.com/user-attachments/assets/ce223a35-8bb3-4aeb-934a-ce5697e582ed)
+- ![image](https://github.com/user-attachments/assets/c1339883-8e9e-4872-9414-bedecfd62d04)
+- ![image](https://github.com/user-attachments/assets/f1b9bdc4-75f7-4df1-9c0f-de49bf201472)
+### Sprint Notları:
+#### Günlük Scrum Toplantıları:
+- Her gün Whatsapp üzerinden günlük bilgilendirme şeklinde yapıldı.
+- Günlük ilerlemeler ve engeller tartışıldı.
+- Her takım üyesi kendi görevleri hakkında bilgi verdi ve yardıma ihtiyaç duyduğu konuları belirtti.
+#### Takım İçi İletişim: 
+- Takım üyeleri arasında etkili iletişim sağlandı.
+- Whatsapp üzerinden hızlı bilgi alışverişi yapıldı.
+### diğer
+### Sprint Review:
+- Scrum boyunca özveriyle çalışıdığı için takım üyeleri birbirini tebrik etti.
+- Tamamlanması gereken 26 puanlık backlog puanı tamamlanmıştır.
+- Uygulama içi sayfalar ve firebase eksikleri tamamlandı.
+### Sprint Retrospective:
+- Yardıma ihtiyaç duyduğumuzda iletişimde bulunulacağına dair konuşmalar yapıldı.
+
+
+
+
+
 
 
 
