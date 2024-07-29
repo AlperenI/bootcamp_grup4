@@ -1,3 +1,4 @@
+import 'package:bootcamp_grup4/utils/const.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,7 +14,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  final user = FirebaseAuth.instance.currentUser!;
+  User user=FirebaseAuth.instance.currentUser!;
   File? _image;
 
   final phoneFormatter = MaskTextInputFormatter(
@@ -22,11 +23,13 @@ class _SettingsPageState extends State<SettingsPage> {
   );
 
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
-  bool _isPasswordMatched = true;
+  final TextEditingController _confirmPasswordController =TextEditingController();
+  bool _isPasswordMatched = false;
+  bool _passwordChange=false;
+  bool isfirst=true;
 
-  get backgroundColor => null;
+
+ 
 
   Future<void> _pickImage() async {
     try {
@@ -44,16 +47,42 @@ class _SettingsPageState extends State<SettingsPage> {
 
   void _checkPasswordMatch(String value) {
     setState(() {
-      _isPasswordMatched =
-          _passwordController.text == _confirmPasswordController.text;
+      _isPasswordMatched =_passwordController.text == _confirmPasswordController.text;   
     });
   }
+
+  void updatePassword()async{
+    if (_isPasswordMatched==true) {
+            await user.updatePassword(_confirmPasswordController.text);
+      setState(() {
+        _passwordChange=true;
+      });
+    }else{
+      setState(() {
+        isfirst=false;
+        _passwordChange=false;
+      });
+    }
+  }
+
+Widget showResult(){
+  String text="";
+  if (isfirst==false) {
+    setState(() {
+      text="Tekrar deneyin.";
+    });
+  }
+  return Text(_passwordChange? "Şifrenizi değiştirdiniz!":text,
+  style: TextStyle(color:_passwordChange? Colors.blue:Colors.red),
+  );
+}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: bacgroundColor,
       appBar: AppBar(
+        backgroundColor: bacgroundColor,
         automaticallyImplyLeading:
             false, // Bu, varsayılan geri düğmesini kaldırır.
         title: Row(
@@ -124,10 +153,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 inputFormatters: [phoneFormatter],
               ),
               const SizedBox(height: 70),
+              showResult(),
               ElevatedButton(
-                onPressed: () {
-                  // Kaydet
-                },
+                onPressed:updatePassword,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 184, 187, 189),
                   padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
@@ -141,6 +169,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
               const SizedBox(height: 20),
+              
               ElevatedButton(
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
