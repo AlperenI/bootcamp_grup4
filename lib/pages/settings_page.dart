@@ -2,26 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:io';
-import 'package:bootcamp_grup4/utils/const.dart';
-
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Settings Page',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: SettingsPage(),
-    );
-  }
-}
+import 'package:flutter/services.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -33,6 +15,16 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   final user = FirebaseAuth.instance.currentUser!;
   File? _image;
+
+  final phoneFormatter = MaskTextInputFormatter(
+    mask: '### ### ## ##',
+    filter: {"#": RegExp(r'[0-9]')},
+  );
+
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+  bool _isPasswordMatched = true;
 
   get backgroundColor => null;
 
@@ -46,8 +38,15 @@ class _SettingsPageState extends State<SettingsPage> {
         }
       });
     } catch (e) {
-      print("Hatalı fotoğraf $e");
+      print("Hatalı Fotoğraf: $e");
     }
+  }
+
+  void _checkPasswordMatch(String value) {
+    setState(() {
+      _isPasswordMatched =
+          _passwordController.text == _confirmPasswordController.text;
+    });
   }
 
   @override
@@ -100,27 +99,34 @@ class _SettingsPageState extends State<SettingsPage> {
               Text(
                 "${user.email}",
                 textAlign: TextAlign.center,
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               _buildTextField(
-                label: 'Yeni Şifreniz',
+                label: 'Şifre',
                 isPassword: true,
+                controller: _passwordController,
+                onChanged: _checkPasswordMatch,
+                borderColor: _isPasswordMatched ? Colors.green : Colors.red,
               ),
               const SizedBox(height: 20),
               _buildTextField(
                 label: 'Şifre Doğrulama',
                 isPassword: true,
+                controller: _confirmPasswordController,
+                onChanged: _checkPasswordMatch,
+                borderColor: _isPasswordMatched ? Colors.green : Colors.red,
               ),
               const SizedBox(height: 20),
               _buildTextField(
                 label: 'Telefon',
+                keyboardType: TextInputType.number,
+                inputFormatters: [phoneFormatter],
               ),
               const SizedBox(height: 70),
               ElevatedButton(
                 onPressed: () {
-                  // kaydet
+                  // Kaydet
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 184, 187, 189),
@@ -141,12 +147,13 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromARGB(255, 184, 187, 189),
-                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   "Çıkış Yap",
                   style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
@@ -162,20 +169,35 @@ class _SettingsPageState extends State<SettingsPage> {
     required String label,
     String? initialValue,
     bool isPassword = false,
+    TextInputType keyboardType = TextInputType.text,
+    List<TextInputFormatter>? inputFormatters,
+    TextEditingController? controller,
+    Function(String)? onChanged,
+    Color borderColor = Colors.grey,
   }) {
     return TextField(
       obscureText: isPassword,
+      keyboardType: keyboardType,
+      inputFormatters: inputFormatters,
+      controller: controller,
+      onChanged: onChanged,
       decoration: InputDecoration(
         labelText: label,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
+          borderSide: BorderSide(color: borderColor, width: 2.0),
         ),
         filled: true,
         fillColor: Colors.grey[200],
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: BorderSide(color: borderColor, width: 2.0),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+          borderSide: BorderSide(color: borderColor, width: 2.0),
+        ),
       ),
-      controller: initialValue != null
-          ? TextEditingController(text: initialValue)
-          : null,
     );
   }
 }
