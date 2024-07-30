@@ -27,9 +27,10 @@ class _HomePageState extends State<HomePage> {
   List<QueryDocumentSnapshot> _filteredEntries = [];
   Timer? _timer;
   bool _isValidDescription(String description) {
-  final validCharacters = description.replaceAll(RegExp(r'\s+'), '');
-  return validCharacters.length >= 20;
-}
+    final validCharacters = description.replaceAll(RegExp(r'\s+'), '');
+    return validCharacters.length >= 20;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -47,10 +48,10 @@ class _HomePageState extends State<HomePage> {
     _searchController.dispose();
     super.dispose();
   }
-  
 
   Future<void> _fetchEntries() async {
-    final snapshot = await FirebaseFirestore.instance.collection('entries').get();
+    final snapshot =
+        await FirebaseFirestore.instance.collection('entries').get();
     setState(() {
       _entries = snapshot.docs;
       _filteredEntries = _entries;
@@ -82,7 +83,9 @@ class _HomePageState extends State<HomePage> {
 
   Future<String?> _uploadImageToStorage(File imageFile) async {
     try {
-      final storageRef = FirebaseStorage.instance.ref().child('images/${DateTime.now().toIso8601String()}');
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('images/${DateTime.now().toIso8601String()}');
       final uploadTask = storageRef.putFile(imageFile);
       final snapshot = await uploadTask.whenComplete(() => {});
       final imageUrl = await snapshot.ref.getDownloadURL();
@@ -92,111 +95,129 @@ class _HomePageState extends State<HomePage> {
       return null;
     }
   }
-void _showAlertDialog() {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return StatefulBuilder(
-        builder: (context, setDialogState) {
-          return AlertDialog(
-            backgroundColor: bacgroundColor,
-            title: Text('Başlık ve Yazı Girin'),
-            content: SingleChildScrollView(
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _image == null
-                        ? Text('Fotoğraf seçilmedi.')
-                        : Image.file(_image!, fit: BoxFit.cover, height: 300),
-                    SizedBox(height: 10),
-                    ElevatedButton(
-                      style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.redAccent)),
-                      onPressed: () => _pickImage(setDialogState),
-                      child: Text('Fotoğraf Seçin', style: TextStyle(color: Colors.black)),
-                    ),
-                    SizedBox(height: 10),
-                    TextField(
-                      controller: _titleController,
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 1.5)),
-                        focusColor: Colors.brown,
-                        hintText: 'Başlığınız',
-                        border: OutlineInputBorder(),
-                        errorText: _titleError ? 'Başlık gerekli' : null,
+
+  void _showAlertDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setDialogState) {
+            return AlertDialog(
+              backgroundColor: Colors.white,
+              title: Text('Başlık ve Yazı Girin'),
+              content: SingleChildScrollView(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _image == null
+                          ? Text('Fotoğraf seçilmedi.')
+                          : Image.file(_image!, fit: BoxFit.cover, height: 300),
+                      SizedBox(height: 10),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Color.fromRGBO(20, 33, 61, 1))),
+                        onPressed: () => _pickImage(setDialogState),
+                        child: Text('Fotoğraf Seçin',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(252, 163, 17, 1))),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    TextField(
-                      controller: _descriptionController,
-                      decoration: InputDecoration(
-                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 1.5)),
-                        focusColor: Colors.brown,
-                        hintText: 'Yazınız (minimum 20 karakter)',
-                        border: OutlineInputBorder(),
-                        errorText: _descriptionError ? 'Yazı en az 20 karakter olmalı' : null,
+                      SizedBox(height: 10),
+                      TextField(
+                        controller: _titleController,
+                        decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(width: 1.5)),
+                          focusColor: Color.fromRGBO(252, 163, 17, 1),
+                          hintText: 'Başlığınız',
+                          border: OutlineInputBorder(),
+                          errorText: _titleError ? 'Başlık gerekli' : null,
+                        ),
                       ),
-                      minLines: 10,
-                      maxLines: 20,
-                    ),
-                  ],
+                      SizedBox(height: 10),
+                      TextField(
+                        controller: _descriptionController,
+                        decoration: InputDecoration(
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(width: 1.5)),
+                          focusColor: Color.fromRGBO(252, 163, 17, 1),
+                          hintText: 'Yazınız (minimum 20 karakter)',
+                          border: OutlineInputBorder(),
+                          errorText: _descriptionError
+                              ? 'Yazı en az 20 karakter olmalı'
+                              : null,
+                        ),
+                        minLines: 10,
+                        maxLines: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-            actions: [
-              TextButton(
-                child: Text('Kapat', style: TextStyle(color: Colors.brown)),
-                onPressed: () {
-                  _titleController.clear();
-                  _descriptionController.clear();
-                  setState(() {
-                    _image = null;
-                  });
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
-                child: _isLoading
-                    ? CircularProgressIndicator()
-                    : Text('Kaydet', style: TextStyle(color: Colors.brown)),
-                onPressed: _isLoading
-                    ? null
-                    : () async {
-                        setDialogState(() {
-                          _titleError = _titleController.text.isEmpty;
-                          _descriptionError = !_isValidDescription(_descriptionController.text);
-                        });
-
-                        if (!_titleError && !_descriptionError) {
+              actions: [
+                TextButton(
+                  child: Text('Kapat',
+                      style: TextStyle(color: Color.fromRGBO(252, 163, 17, 1))),
+                  onPressed: () {
+                    _titleController.clear();
+                    _descriptionController.clear();
+                    setState(() {
+                      _image = null;
+                    });
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child: _isLoading
+                      ? CircularProgressIndicator()
+                      : Text('Kaydet',
+                          style: TextStyle(
+                              color: Color.fromRGBO(252, 163, 17, 1))),
+                  onPressed: _isLoading
+                      ? null
+                      : () async {
                           setDialogState(() {
-                            _isLoading = true;
+                            _titleError = _titleController.text.isEmpty;
+                            _descriptionError = !_isValidDescription(
+                                _descriptionController.text);
                           });
 
-                          await FirebaseFirestore.instance.collection('entries').add({
-                            'title': _titleController.text,
-                            'description': _descriptionController.text,
-                            'image_url': _image != null ? await _uploadImageToStorage(_image!) : null,
-                          });
+                          if (!_titleError && !_descriptionError) {
+                            setDialogState(() {
+                              _isLoading = true;
+                            });
 
-                          setState(() {
-                            _titleController.clear();
-                            _descriptionController.clear();
-                            _image = null;
-                            _isLoading = false;
-                          });
-                          _fetchEntries();
-                          Navigator.of(context).pop();
-                        }
-                      },
-              ),
-            ],
-          );
-        },
-      );
-    },
-  );
-}
+                            await FirebaseFirestore.instance
+                                .collection('entries')
+                                .add({
+                              'title': _titleController.text,
+                              'description': _descriptionController.text,
+                              'image_url': _image != null
+                                  ? await _uploadImageToStorage(_image!)
+                                  : null,
+                            });
+
+                            setState(() {
+                              _titleController.clear();
+                              _descriptionController.clear();
+                              _image = null;
+                              _isLoading = false;
+                            });
+                            _fetchEntries();
+                            Navigator.of(context).pop();
+                          }
+                        },
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -206,8 +227,9 @@ void _showAlertDialog() {
         toolbarHeight: 45,
         centerTitle: true,
         backgroundColor: bacgroundColor,
-        title: Text("Ana Sayfa", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
-        iconTheme: IconThemeData(color: Colors.black),
+        title: Text("Ana Sayfa",
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black)),
+        iconTheme: IconThemeData(color: Color.fromRGBO(252, 163, 17, 1)),
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(55.0),
           child: Padding(
@@ -215,8 +237,10 @@ void _showAlertDialog() {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8),borderSide: BorderSide(width: 2)),
-                focusColor: Colors.brown,
+                focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    borderSide: BorderSide(width: 2)),
+                focusColor: Color.fromRGBO(252, 163, 17, 1),
                 hintText: 'Arama...',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8.0),
@@ -231,24 +255,25 @@ void _showAlertDialog() {
       ),
       backgroundColor: bacgroundColor,
       body: _filteredEntries.isEmpty
-        ? Center(child: CircularProgressIndicator())
-        : ListView.builder(
-            itemCount: _filteredEntries.length,
-            itemBuilder: (context, index) {
-              final entry = _filteredEntries[index].data() as Map<String, dynamic>;
-              final title = entry['title'] ?? '';
-              final description = entry['description'] ?? '';
-              final imageUrl = entry['image_url'] as String?;
+          ? Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: _filteredEntries.length,
+              itemBuilder: (context, index) {
+                final entry =
+                    _filteredEntries[index].data() as Map<String, dynamic>;
+                final title = entry['title'] ?? '';
+                final description = entry['description'] ?? '';
+                final imageUrl = entry['image_url'] as String?;
 
-              return Entry(
-                title: title,
-                description: description,
-                imageUrl: imageUrl,
-              );
-            },
-          ),
+                return Entry(
+                  title: title,
+                  description: description,
+                  imageUrl: imageUrl,
+                );
+              },
+            ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.brown,
+        backgroundColor: Color.fromRGBO(252, 163, 17, 1),
         foregroundColor: Colors.white,
         onPressed: _showAlertDialog,
         child: Icon(Icons.create_outlined),

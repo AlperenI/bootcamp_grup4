@@ -88,7 +88,7 @@ class _EntryState extends State<Entry> {
         borderRadius: BorderRadius.circular(20),
         side: BorderSide(width: 2, color: Colors.blueGrey),
       ),
-      color: Colors.white,
+      color: Color.fromRGBO(20, 33, 61, 1),
       child: Container(
         constraints: BoxConstraints(
           maxHeight: 200,
@@ -121,21 +121,29 @@ class _EntryState extends State<Entry> {
                 ),
           title: Text(
             widget.title,
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.red),
+            style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: Color.fromRGBO(252, 163, 17, 1)),
           ),
           subtitle: Text(
             widget.description,
             maxLines: 4,
+            style: TextStyle(
+              color: Colors.white,
+            ),
           ),
           trailing: IconButton(
-            selectedIcon: Icon(Icons.favorite, color: Colors.red),
+            selectedIcon:
+                Icon(Icons.favorite, color: Color.fromRGBO(239, 35, 60, 1)),
             isSelected: isFavorite,
             onPressed: _toggleFavorite,
             color: Colors.black,
             padding: EdgeInsets.all(0),
             iconSize: 25,
             splashRadius: 1,
-            icon: Icon(Icons.favorite_outline, color: Colors.red),
+            icon: Icon(Icons.favorite_outline,
+                color: Color.fromRGBO(239, 35, 60, 1)),
           ),
           dense: true,
         ),

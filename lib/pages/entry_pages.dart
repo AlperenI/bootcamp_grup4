@@ -16,21 +16,21 @@ class EntryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bacgroundColor,
+      backgroundColor: Color.fromRGBO(20, 33, 61, 1),
       appBar: AppBar(
         elevation: 1,
         toolbarHeight: 40,
         centerTitle: true,
-        backgroundColor: bacgroundColor,
+        backgroundColor: Color.fromRGBO(20, 33, 61, 1),
         title: Text(
           title,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.black,
+            color: Color.fromRGBO(252, 163, 17, 1),
             fontSize: 20,
           ),
         ),
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: Color.fromRGBO(202, 139, 38, 1)),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -66,16 +66,15 @@ class EntryPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Colors.redAccent,
+                  color: Colors.white,
                   letterSpacing: 1.2,
                 ),
               ),
               SizedBox(height: 20),
               Container(
-                
                 padding: const EdgeInsets.all(12.0),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.7),
+                  color: Color.fromRGBO(20, 33, 61, 1),
                   borderRadius: BorderRadius.circular(5),
                   boxShadow: [
                     BoxShadow(
@@ -85,14 +84,15 @@ class EntryPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Text(textAlign: TextAlign.center,
+                child: Text(
+                  textAlign: TextAlign.center,
                   "  $description",
                   style: TextStyle(
                     fontSize: 18,
                     height: 1.3,
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.w400,
-                    color: Colors.black87,
+                    color: Color.fromRGBO(252, 163, 17, 1),
                   ),
                 ),
               ),
